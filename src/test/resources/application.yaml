@@ -1,0 +1,28 @@
+simple:
+  outbox:
+    enabled: true
+    batchSize: 3
+    pollingPool: 3
+    jitter: 0.5
+    lock: 60s
+    backoff: 1ms
+
+spring:
+  datasource:
+    url: 'UNSET'
+    username: 'UNSET'
+    password: 'UNSET'
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        type:
+          preferred_uuid_jdbc_type: CHAR
+        jdbc:
+          batch_size: 20
+        #show_sql: true
+
+logging:
+  level:
+    com.github.kevvvvyp.simpletransactionaloutboxstarter: TRACE
