@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_spring_boot_simple_transactional_outbox_starter_1693833510958-push-trigger-input-set
+  identifier: Build_spring_boot_simple_transactional_outbox_starter_1693833510958pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_spring_boot_simple_transactional_outbox_starter_1693833510958
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
