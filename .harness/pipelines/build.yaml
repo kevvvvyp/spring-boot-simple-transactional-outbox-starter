@@ -24,6 +24,22 @@ pipeline:
                     command: ./gradlew clean build -x Test
                   timeout: ""
                   type: Run
+          platform:
+            arch: Amd64
+            os: Linux
+          runtime:
+            spec: {}
+            type: Cloud
+        type: CI
+    - stage:
+        name: Test
+        identifier: Test
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
               - step:
                   identifier: test
                   name: test
@@ -37,4 +53,3 @@ pipeline:
           runtime:
             spec: {}
             type: Cloud
-        type: CI
