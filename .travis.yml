@@ -1,8 +1,0 @@
-language: java
-install: true
-
-dist: trusty
-jdk: oraclejdk17
-
-script:
-  - ./gradlew clean build
