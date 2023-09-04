@@ -1,0 +1,33 @@
+pipeline:
+  identifier: Build_spring_boot_simple_transactional_outbox_starter_1693833510958
+  name: Build spring-boot-simple-transactional-outbox-starter
+  orgIdentifier: default
+  projectIdentifier: default_project
+  properties:
+    ci:
+      codebase:
+        build: <+input>
+        connectorRef: account.Github_OAuth_1693833468477
+        repoName: kevvvvyp/spring-boot-simple-transactional-outbox-starter
+  stages:
+    - stage:
+        identifier: build
+        name: build
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  identifier: echo
+                  name: echo
+                  spec:
+                    command: echo hello world
+                  timeout: ""
+                  type: Run
+          platform:
+            arch: Amd64
+            os: Linux
+          runtime:
+            spec: {}
+            type: Cloud
+        type: CI
