@@ -21,30 +21,22 @@ pipeline:
                   identifier: build
                   name: build
                   spec:
+                    connectorRef: account.harnessImage
+                    image: eclipse-temurin:17.0
+                    shell: Sh
                     command: ./gradlew clean build -x Test
+                    imagePullPolicy: IfNotPresent
                   timeout: ""
                   type: Run
-          platform:
-            arch: Amd64
-            os: Linux
-          runtime:
-            spec: {}
-            type: Cloud
-        type: CI
-    - stage:
-        name: Test
-        identifier: Test
-        description: ""
-        type: CI
-        spec:
-          cloneCodebase: true
-          execution:
-            steps:
               - step:
                   identifier: test
                   name: test
                   spec:
+                    connectorRef: account.harnessImage
+                    image: eclipse-temurin:17.0
+                    shell: Sh
                     command: ./gradlew Test
+                    imagePullPolicy: IfNotPresent
                   timeout: ""
                   type: Run
           platform:
@@ -53,3 +45,4 @@ pipeline:
           runtime:
             spec: {}
             type: Cloud
+        type: CI
