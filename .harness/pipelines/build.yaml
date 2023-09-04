@@ -18,10 +18,17 @@ pipeline:
           execution:
             steps:
               - step:
-                  identifier: echo
-                  name: echo
+                  identifier: build
+                  name: build
                   spec:
-                    command: echo hello world
+                    command: ./gradlew clean build -x Test
+                  timeout: ""
+                  type: Run
+              - step:
+                  identifier: test
+                  name: test
+                  spec:
+                    command: ./gradlew Test
                   timeout: ""
                   type: Run
           platform:
