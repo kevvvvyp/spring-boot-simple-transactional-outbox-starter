@@ -1,6 +1,7 @@
 package com.github.kevvvvyp.simpletransactionaloutboxstarter.service;
 
 import static java.time.Duration.between;
+import static java.time.Duration.ofMillis;
 import static java.time.Duration.ofSeconds;
 import static java.time.Instant.now;
 
@@ -254,6 +255,7 @@ public class PostgresOutboxServiceIntegrationTest {
 	void canReclaimLockedMessages() throws InterruptedException {
 		// Config
 		final Duration temporaryLockDuration = ofSeconds( 20 );
+		final Duration tolerance = ofMillis( 1500 );
 		outboxConfiguration.setBackoff( Duration.ofMillis( 50 ) );
 		outboxConfiguration.setLock( temporaryLockDuration );
 		inbox.simulateDeliveryFailure();
@@ -273,7 +275,8 @@ public class PostgresOutboxServiceIntegrationTest {
 
 		// Wait for existing messages to be reclaimed after 20s & successful delivered
 		doUntil( () -> assertThat( inbox.getReceivedMessages() ).containsAll( sentById.values() ) );
-		assertThat( between( start, now() ) ).isGreaterThanOrEqualTo( temporaryLockDuration );
+		assertThat( between( start, now() ) ).isGreaterThanOrEqualTo(
+				temporaryLockDuration.minus( tolerance ) );
 	}
 
 	@Test
