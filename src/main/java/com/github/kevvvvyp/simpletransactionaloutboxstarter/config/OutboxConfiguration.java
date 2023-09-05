@@ -1,4 +1,4 @@
-package com.github.kevvvvyp.simpletransactionaloutboxstarter.config;
+package io.github.kevvvvyp.simpletransactionaloutboxstarter.config;
 
 import java.time.Duration;
 

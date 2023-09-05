@@ -1,4 +1,4 @@
-package com.github.kevvvvyp.simpletransactionaloutboxstarter.test.testcontainers;
+package io.github.kevvvvyp.simpletransactionaloutboxstarter.test.testcontainers;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

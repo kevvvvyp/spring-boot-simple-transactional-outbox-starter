@@ -1,4 +1,4 @@
-package com.github.kevvvvyp.simpletransactionaloutboxstarter.service.delivery;
+package io.github.kevvvvyp.simpletransactionaloutboxstarter.service.delivery;
 
 /**
  * Transactional Outbox Service

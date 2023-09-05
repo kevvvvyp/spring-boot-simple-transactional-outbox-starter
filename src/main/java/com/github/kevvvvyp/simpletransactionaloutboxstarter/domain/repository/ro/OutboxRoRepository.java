@@ -1,4 +1,4 @@
-package com.github.kevvvvyp.simpletransactionaloutboxstarter.domain.repository.ro;
+package io.github.kevvvvyp.simpletransactionaloutboxstarter.domain.repository.ro;
 
 import java.time.Instant;
 import java.util.Collection;
@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.domain.model.OutboxEntity;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.domain.model.OutboxEntity;
 
 @Repository
 public interface OutboxRoRepository extends JpaRepository<OutboxEntity, UUID> {

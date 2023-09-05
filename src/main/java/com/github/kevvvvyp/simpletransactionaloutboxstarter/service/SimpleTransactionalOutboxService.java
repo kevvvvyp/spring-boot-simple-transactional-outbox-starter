@@ -1,4 +1,4 @@
-package com.github.kevvvvyp.simpletransactionaloutboxstarter.service;
+package io.github.kevvvvyp.simpletransactionaloutboxstarter.service;
 
 import static java.util.Objects.requireNonNull;
 
@@ -9,10 +9,10 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.service.delivery.OutboxDeliveryService;
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.service.delivery.OutboxPollingDeliveryService;
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.service.registration.OutboxRegistrationService;
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.transfer.Message;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.service.delivery.OutboxDeliveryService;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.service.delivery.OutboxPollingDeliveryService;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.service.registration.OutboxRegistrationService;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.transfer.Message;
 
 import lombok.extern.slf4j.Slf4j;
 

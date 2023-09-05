@@ -1,12 +1,12 @@
-package com.github.kevvvvyp.simpletransactionaloutboxstarter.service;
+package io.github.kevvvvyp.simpletransactionaloutboxstarter.service;
 
 import static java.util.Optional.ofNullable;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.domain.model.OutboxEntity;
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.transfer.Message;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.domain.model.OutboxEntity;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.transfer.Message;
 
 public class MessageOutboxEntityTransformer {
 	public static OutboxEntity toEntity( final Message message ) {

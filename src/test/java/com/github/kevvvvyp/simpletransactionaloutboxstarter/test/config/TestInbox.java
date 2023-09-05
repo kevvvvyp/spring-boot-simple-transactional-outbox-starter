@@ -1,4 +1,4 @@
-package com.github.kevvvvyp.simpletransactionaloutboxstarter.test.config;
+package io.github.kevvvvyp.simpletransactionaloutboxstarter.test.config;
 
 import java.util.Collection;
 import java.util.List;
@@ -7,8 +7,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.springframework.stereotype.Component;
 
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.service.OutboxDeliveryStrategy;
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.transfer.Message;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.service.OutboxDeliveryStrategy;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.transfer.Message;
 
 import lombok.Getter;
 

@@ -1,4 +1,4 @@
-package com.github.kevvvvyp.simpletransactionaloutboxstarter.domain.repository.rw;
+package io.github.kevvvvyp.simpletransactionaloutboxstarter.domain.repository.rw;
 
 import static org.hibernate.cfg.AvailableSettings.JAKARTA_LOCK_TIMEOUT;
 
@@ -16,7 +16,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.stereotype.Repository;
 
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.domain.model.OutboxEntity;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.domain.model.OutboxEntity;
 
 import jakarta.persistence.LockModeType;
 import jakarta.persistence.QueryHint;

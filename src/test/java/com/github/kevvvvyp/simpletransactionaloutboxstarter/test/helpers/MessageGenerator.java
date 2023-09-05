@@ -1,4 +1,4 @@
-package com.github.kevvvvyp.simpletransactionaloutboxstarter.test.helpers;
+package io.github.kevvvvyp.simpletransactionaloutboxstarter.test.helpers;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
 import com.github.javafaker.Faker;
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.transfer.Message;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.transfer.Message;
 
 public class MessageGenerator {
 	public static final Faker FAKER = new Faker();

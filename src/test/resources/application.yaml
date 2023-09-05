@@ -25,4 +25,4 @@ spring:
 
 logging:
   level:
-    com.github.kevvvvyp.simpletransactionaloutboxstarter: TRACE
+    io.github.kevvvvyp.simpletransactionaloutboxstarter: TRACE

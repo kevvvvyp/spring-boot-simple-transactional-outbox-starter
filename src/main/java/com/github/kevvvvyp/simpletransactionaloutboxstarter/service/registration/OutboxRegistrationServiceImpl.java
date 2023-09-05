@@ -1,4 +1,4 @@
-package com.github.kevvvvyp.simpletransactionaloutboxstarter.service.registration;
+package io.github.kevvvvyp.simpletransactionaloutboxstarter.service.registration;
 
 import java.util.Collection;
 import java.util.List;
@@ -14,13 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
 
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.domain.model.OutboxEntity;
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.domain.repository.ro.OutboxRoRepository;
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.domain.repository.rw.OutboxRwRepository;
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.service.MessageOutboxEntityTransformer;
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.service.OutboxDeliveryStrategy;
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.service.TransactionalOutboxService;
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.transfer.Message;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.domain.model.OutboxEntity;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.domain.repository.ro.OutboxRoRepository;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.domain.repository.rw.OutboxRwRepository;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.service.MessageOutboxEntityTransformer;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.service.OutboxDeliveryStrategy;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.service.TransactionalOutboxService;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.transfer.Message;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -6,7 +6,7 @@ plugins {
 
 apply plugin: 'jacoco'
 
-group = 'com.github.kevvvvyp'
+group = 'io.github.kevvvvyp'
 version = '0.0.1-SNAPSHOT'
 
 java {

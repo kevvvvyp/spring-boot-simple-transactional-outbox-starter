@@ -1,9 +1,9 @@
-package com.github.kevvvvyp.simpletransactionaloutboxstarter.config;
+package io.github.kevvvvyp.simpletransactionaloutboxstarter.config;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Import;
 
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.service.SimpleTransactionalOutboxService;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.service.SimpleTransactionalOutboxService;
 
 import lombok.extern.slf4j.Slf4j;
 
