@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.github.kevvvvyp.simpletransactionaloutboxstarter.config.OutboxAutoConfiguration
+  io.github.kevvvvyp.simpletransactionaloutboxstarter.config.OutboxAutoConfiguration

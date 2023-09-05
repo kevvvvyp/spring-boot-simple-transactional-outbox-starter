@@ -1,10 +1,10 @@
-package com.github.kevvvvyp.simpletransactionaloutboxstarter.service;
+package io.github.kevvvvyp.simpletransactionaloutboxstarter.service;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.UUID;
 
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.transfer.Message;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.transfer.Message;
 
 public interface TransactionalOutboxService {
 	/**

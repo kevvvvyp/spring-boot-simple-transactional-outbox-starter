@@ -1,4 +1,4 @@
-package com.github.kevvvvyp.simpletransactionaloutboxstarter.service;
+package io.github.kevvvvyp.simpletransactionaloutboxstarter.service;
 
 import static java.time.Duration.between;
 import static java.time.Duration.ofMillis;
@@ -9,12 +9,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.TestInstance.Lifecycle;
 
-import static com.github.kevvvvyp.simpletransactionaloutboxstarter.test.helpers.AwaitUtils.doUntil;
-import static com.github.kevvvvyp.simpletransactionaloutboxstarter.test.helpers.MessageGenerator.FAKER;
-import static com.github.kevvvvyp.simpletransactionaloutboxstarter.test.helpers.MessageGenerator.addDelay;
-import static com.github.kevvvvyp.simpletransactionaloutboxstarter.test.helpers.MessageGenerator.generateDuplicateMessages;
-import static com.github.kevvvvyp.simpletransactionaloutboxstarter.test.helpers.MessageGenerator.generateRandomMessage;
-import static com.github.kevvvvyp.simpletransactionaloutboxstarter.test.helpers.MessageGenerator.generateRandomMessages;
+import static io.github.kevvvvyp.simpletransactionaloutboxstarter.test.helpers.AwaitUtils.doUntil;
+import static io.github.kevvvvyp.simpletransactionaloutboxstarter.test.helpers.MessageGenerator.FAKER;
+import static io.github.kevvvvyp.simpletransactionaloutboxstarter.test.helpers.MessageGenerator.addDelay;
+import static io.github.kevvvvyp.simpletransactionaloutboxstarter.test.helpers.MessageGenerator.generateDuplicateMessages;
+import static io.github.kevvvvyp.simpletransactionaloutboxstarter.test.helpers.MessageGenerator.generateRandomMessage;
+import static io.github.kevvvvyp.simpletransactionaloutboxstarter.test.helpers.MessageGenerator.generateRandomMessages;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -35,10 +35,10 @@ import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.config.OutboxConfiguration;
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.test.config.TestInbox;
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.test.testcontainers.UseMysqlDatabase;
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.transfer.Message;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.config.OutboxConfiguration;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.test.config.TestInbox;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.test.testcontainers.UseMysqlDatabase;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.transfer.Message;
 
 import lombok.extern.slf4j.Slf4j;
 

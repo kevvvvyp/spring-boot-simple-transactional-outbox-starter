@@ -1,4 +1,4 @@
-package com.github.kevvvvyp.simpletransactionaloutboxstarter.transfer;
+package io.github.kevvvvyp.simpletransactionaloutboxstarter.transfer;
 
 import java.time.Instant;
 

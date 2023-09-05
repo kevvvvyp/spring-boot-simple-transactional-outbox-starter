@@ -1,4 +1,4 @@
-package com.github.kevvvvyp.simpletransactionaloutboxstarter.service.delivery;
+package io.github.kevvvvyp.simpletransactionaloutboxstarter.service.delivery;
 
 import java.time.Duration;
 import java.util.Map;
@@ -13,9 +13,9 @@ import org.springframework.stereotype.Service;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
 
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.config.OutboxConfiguration;
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.service.TransactionalOutboxService;
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.transfer.Message;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.config.OutboxConfiguration;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.service.TransactionalOutboxService;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.transfer.Message;
 
 import lombok.extern.slf4j.Slf4j;
 

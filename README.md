@@ -36,7 +36,7 @@ spring:
 
 logging:
   level:
-    com.github.kevvvvyp.simpletransactionaloutboxstarter: INFO
+    io.github.kevvvvyp.simpletransactionaloutboxstarter: INFO
 
 ```
 * This library needs to know where to delivery messages to. Define a singleton within your application...

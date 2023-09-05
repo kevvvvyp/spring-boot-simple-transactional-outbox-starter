@@ -1,4 +1,4 @@
-package com.github.kevvvvyp.simpletransactionaloutboxstarter.service.delivery;
+package io.github.kevvvvyp.simpletransactionaloutboxstarter.service.delivery;
 
 import static java.time.Instant.now;
 import static java.util.stream.Collectors.groupingBy;
@@ -17,13 +17,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.config.OutboxConfiguration;
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.domain.model.OutboxEntity;
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.domain.repository.ro.OutboxRoRepository;
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.domain.repository.rw.OutboxRwRepository;
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.service.MessageOutboxEntityTransformer;
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.service.OutboxDeliveryStrategy;
-import com.github.kevvvvyp.simpletransactionaloutboxstarter.transfer.Message;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.config.OutboxConfiguration;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.domain.model.OutboxEntity;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.domain.repository.ro.OutboxRoRepository;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.domain.repository.rw.OutboxRwRepository;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.service.MessageOutboxEntityTransformer;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.service.OutboxDeliveryStrategy;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.transfer.Message;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;

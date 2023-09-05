@@ -1,4 +1,4 @@
-package com.github.kevvvvyp.simpletransactionaloutboxstarter.test.testcontainers;
+package io.github.kevvvvyp.simpletransactionaloutboxstarter.test.testcontainers;
 
 import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;

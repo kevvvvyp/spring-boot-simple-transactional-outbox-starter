@@ -1,4 +1,4 @@
-package com.github.kevvvvyp.simpletransactionaloutboxstarter.test.helpers;
+package io.github.kevvvvyp.simpletransactionaloutboxstarter.test.helpers;
 
 import static org.awaitility.Awaitility.await;
 
