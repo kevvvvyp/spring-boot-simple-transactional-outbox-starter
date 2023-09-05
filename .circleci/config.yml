@@ -49,6 +49,17 @@ jobs:
           path: build/reports/jacoco/test/html
       - store_artifacts:
           path: build/libs
+  publish:
+    docker:
+      - image: cimg/openjdk:17.0
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: Publish
+          # Version in either the tag version OR BUILD-[number]-[branch_name]-[commit]-SNAPSHOT
+          command: ./gradlew publish -PreleaseVersion=${CIRCLE_TAG:-BUILD-$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH-${CIRCLE_SHA1:0:7}-SNAPSHOT}
 
 workflows:
   version: 2
@@ -58,3 +69,7 @@ workflows:
       - test:
           requires:
             - build
+      - publish:
+          requires:
+            - build
+            - test

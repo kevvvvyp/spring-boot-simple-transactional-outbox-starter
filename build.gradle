@@ -1,10 +1,14 @@
 plugins {
-    id 'java'
+    id 'java-library'
+    id "maven-publish"
     id 'org.springframework.boot' version '3.1.0'
     id 'io.spring.dependency-management' version '1.1.0'
+    id "net.linguica.maven-settings" version "0.5"
 }
 
 apply plugin: 'jacoco'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
 
 group = 'io.github.kevvvvyp'
 version = '0.0.1-SNAPSHOT'
@@ -12,7 +16,6 @@ version = '0.0.1-SNAPSHOT'
 java {
     sourceCompatibility = '17'
 }
-
 
 bootJar {
     enabled = false
@@ -30,6 +33,65 @@ configurations {
 
 repositories {
     mavenCentral()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+            if (project.hasProperty("releaseVersion")) {
+                version = project.releaseVersion
+            } else {
+                version = 'undefined'
+            }
+
+            pom {
+                name = 'spring-boot-simple-transactional-outbox-starter'
+                description = 'A convenient Spring Boot Starter for publishing messages via the Transactional Outbox pattern.'
+                url = 'https://github.com/kevvvvyp/spring-boot-simple-transactional-outbox-starter'
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://github.com/kevvvvyp/spring-boot-simple-transactional-outbox-starter/blob/main/LICENSE'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'kevvvvyp'
+                        name = 'Kevin Paton'
+                    }
+                }
+                scm {
+                    url = 'https://github.com/kevvvvyp/spring-boot-simple-transactional-outbox-starter.git'
+                }
+            }
+
+            repositories {
+                maven {
+                    if (version.endsWith('-SNAPSHOT')) {
+                        project.logger.lifecycle("Publishing snaphot " + version + " to https://s01.oss.sonatype.org/content/repositories/snapshots/")
+                        url "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                    } else {
+                        project.logger.lifecycle("Publishing release " + version + " to https://s01.oss.sonatype.org/content/repositories/releases/")
+                        url "https://s01.oss.sonatype.org/content/repositories/releases/"
+                    }
+
+                    name = "OSSRH"
+                    credentials {
+                        username = findProperty("ossrhUsername")
+                        password = findProperty("ossrhPassword")
+                    }
+                }
+            }
+        }
+    }
+}
+
+signing {
+    def signingKey = findProperty("signingKey")
+    def signingPassword = findProperty("signingPassword")
+    useInMemoryPgpKeys(signingKey, signingPassword)
+    sign publishing.publications.named("mavenJava").get()
 }
 
 dependencies {
