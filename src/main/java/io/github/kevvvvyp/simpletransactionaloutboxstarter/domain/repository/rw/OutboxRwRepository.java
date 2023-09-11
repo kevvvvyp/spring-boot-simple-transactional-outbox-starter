@@ -4,7 +4,6 @@ import static org.hibernate.cfg.AvailableSettings.JAKARTA_LOCK_TIMEOUT;
 
 import java.time.Instant;
 import java.util.Collection;
-import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
