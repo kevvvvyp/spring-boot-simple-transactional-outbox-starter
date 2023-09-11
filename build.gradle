@@ -11,7 +11,6 @@ apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
 group = 'io.github.kevvvvyp'
-version = '0.0.1-SNAPSHOT'
 
 java {
     sourceCompatibility = '17'
