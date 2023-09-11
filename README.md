@@ -66,9 +66,31 @@ public class MyApplication {
 		final TransactionalOutboxService outboxService = ctx.getBean(
 				TransactionalOutboxService.class );
 		
+		// Start the service
 		outboxService.start();
+		
+		// Schedule a message for an hour's time
+        Message message = Message.builder()
+				.type( "Simple" )
+				.sender( "sender@email.com" )
+				.recipient( "recipient@email.com" )
+				.subject( "Important" )
+				.deduplicationKey( "hhdaslkjklajwe3k4 )
+				.scheduleAfter( Instant.now().plus( 1, ChronoUnit.HOURS ) )
+				.body( "example" )
+				.build();
+		outboxService.register( message );
 	}
 }
+```
+The snippet below demonstrates how we can send messages...
+```
+...
+	@Autowired
+	public MysqlOutboxServiceIntegrationTest( final TransactionalOutboxService outboxService ) {
+		this.outboxService = outboxService;
+	}
+
 ```
 
 ## Database compatability 
