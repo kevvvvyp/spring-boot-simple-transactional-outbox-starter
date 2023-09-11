@@ -68,17 +68,17 @@ workflows:
       - build:
           filters:
             tags:
-              only: *
+              only: /.*/
       - test:
           filters:
             tags:
-              only: *
+              only: /.*/
           requires:
             - build
       - publish:
           filters:
             tags:
-              only: *
+              only: /.*/
           requires:
             - build
             - test
