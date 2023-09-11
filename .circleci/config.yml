@@ -65,11 +65,20 @@ workflows:
   version: 2
   workflow:
     jobs:
-      - build
+      - build:
+          filters:
+            tags:
+              only: /.*/
       - test:
+          filters:
+            tags:
+              only: /.*/
           requires:
             - build
       - publish:
+          filters:
+            tags:
+              only: /.*/
           requires:
             - build
             - test
