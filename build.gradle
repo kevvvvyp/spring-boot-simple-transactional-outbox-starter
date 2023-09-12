@@ -71,8 +71,8 @@ publishing {
                         project.logger.lifecycle("Publishing snaphot " + version + " to https://s01.oss.sonatype.org/content/repositories/snapshots/")
                         url "https://s01.oss.sonatype.org/content/repositories/snapshots/"
                     } else {
-                        project.logger.lifecycle("Publishing release " + version + " to https://s01.oss.sonatype.org/content/repositories/releases/")
-                        url "https://s01.oss.sonatype.org/content/repositories/releases/"
+                        project.logger.lifecycle("Publishing release " + version + " to https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+                        url "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
                     }
 
                     name = "OSSRH"
