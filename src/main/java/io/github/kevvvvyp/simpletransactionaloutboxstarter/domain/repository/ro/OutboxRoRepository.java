@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import io.github.kevvvvyp.simpletransactionaloutboxstarter.domain.model.OutboxEntity;
@@ -25,8 +26,9 @@ public interface OutboxRoRepository extends JpaRepository<OutboxEntity, UUID> {
 			    (o.scheduledAfter < :now AND o.updatedAt < :reclaimDate AND o.lockedBy IS NOT NULL AND o.type IN (:messageTypes))
 			)
 			""")
-	boolean availableMessages( final Instant now, final Instant reclaimDate,
-			final Collection<String> messageTypes );
+	boolean availableMessages( @Param("now") final Instant now,
+			@Param("reclaimDate") final Instant reclaimDate,
+			@Param("messageTypes") final Collection<String> messageTypes );
 
 	/**
 	 * Look up by deduplicationKey

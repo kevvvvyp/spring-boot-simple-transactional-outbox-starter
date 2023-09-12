@@ -1,8 +1,9 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
 plugins {
     id 'java-library'
     id "maven-publish"
-    id 'org.springframework.boot' version '3.1.0'
-    id 'io.spring.dependency-management' version '1.1.0'
+    id 'org.springframework.boot' version '3.1.0' apply false
     id "net.linguica.maven-settings" version "0.5"
 }
 
@@ -16,12 +17,11 @@ java {
     sourceCompatibility = '17'
 }
 
-bootJar {
-    enabled = false
-}
-
-jar {
-    enabled = true
+apply plugin: 'io.spring.dependency-management'
+dependencyManagement {
+    imports {
+        mavenBom SpringBootPlugin.BOM_COORDINATES
+    }
 }
 
 configurations {
