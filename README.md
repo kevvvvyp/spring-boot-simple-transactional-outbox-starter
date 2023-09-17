@@ -98,6 +98,7 @@ If you find that this library works on another version please reach out or raise
 - `simple.outbox.enabled` - True if you wish the library to deliver messages stored in the database, false if you wish the message to remain undelivered (i.e. no database reads/polling).
 - `simple.outbox.batchSize` - The number of messages you wish the library to consume at once & attempt to deliver.
 - `simple.outbox.pollingPool` - The size of the polling thread pool attempting to find undeliverable messages, must be at least 1.
-- `simple.outbox.jitter` - Apply Jitter to the database polling, this is useful so that all threads don't attempt to consume the same set of messages all at once, it splays the load on the db read instance.
+- `simple.outbox.jitter` - Apply Jitter to the database polling, this is useful so that all threads don't attempt to consume the same set of messages all at once, it splays the load on the db read instance. If set to 0 no jitter is applied.
 - `simple.outbox.lock` - The duration to 'lock' messages for. Once the lock duration is exceeded another process is free to then lock those messages if they remain undelivered.
-- `simple.outbox.backoff` - The duration to wait between polling the database for undelivered messages. Can be combined with Jitter to splay database load.
+- `simple.outbox.idleBackoff` - The duration to wait between polling the database for undelivered messages, it is applied when there are no messages to process. Can be combined with Jitter to splay database load. Setting this to 0 results in no backoff being applied.
+- `simple.outbox.processingBackoff` - The duration to wait between polling the database for undelivered messages, it is applied when there are messages to be processed. Can be combined with Jitter to splay database load. Setting this to 0 results in no backoff being applied.
