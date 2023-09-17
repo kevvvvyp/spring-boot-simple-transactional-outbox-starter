@@ -5,7 +5,8 @@ simple:
     pollingPool: 3
     jitter: 0.5
     lock: 60s
-    backoff: 1ms
+    idleBackoff: 1ms
+    processingBackoff: 0ms
 
 spring:
   datasource:

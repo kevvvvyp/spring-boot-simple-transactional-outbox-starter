@@ -10,12 +10,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.springframework.stereotype.Service;
 
-import io.micrometer.core.instrument.Counter;
-import io.micrometer.core.instrument.MeterRegistry;
-
 import io.github.kevvvvyp.simpletransactionaloutboxstarter.config.OutboxConfiguration;
 import io.github.kevvvvyp.simpletransactionaloutboxstarter.service.TransactionalOutboxService;
 import io.github.kevvvvyp.simpletransactionaloutboxstarter.transfer.Message;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -77,11 +76,14 @@ public class OutboxPollingDeliveryService implements OutboxDeliveryService {
 	public void process() {
 		final UUID pid = UUID.randomUUID();
 		log.info( "OutboxPoller {} is ON", pid );
+		boolean isIdle = true;
 
 		while ( isRunning() ) {
 			try {
 				if ( outboxDao.isNotEmpty() ) {
 					final Map<UUID, Message> messagesById = outboxDao.lock( pid );
+					isIdle = messagesById.isEmpty();
+
 					final int n = messagesById.size();
 					lockedCounter.increment( n );
 
@@ -103,23 +105,27 @@ public class OutboxPollingDeliveryService implements OutboxDeliveryService {
 				log.error( "Polling process failed", e );
 				errorCounter.increment();
 			} finally {
-				applyBackOff();
+				if ( isIdle ) {
+					applyBackOff( config.getIdleBackoff() ); // Idle Back Off
+				} else {
+					applyBackOff( config.getProcessingBackoff() ); // Busy back off
+				}
 			}
 		}
 
 		log.info( "OutboxPoller {} is OFF", pid );
 	}
 
-	private void applyBackOff() {
-		try {
-			final double jitter = config.getJitter();
-			final Duration backoff = config.getBackoff();
-			final Duration d = jitter > 0 ? applyJitter( backoff,
-					config.getJitter() ) : config.getBackoff();
-			Thread.sleep( d.toMillis() );
-
-		} catch ( final InterruptedException e ) {
-			throw new RuntimeException( "Failed to apply back off", e );
+	private void applyBackOff( final Duration backoff ) {
+		if ( !Duration.ZERO.equals( backoff ) ) {
+			try {
+				final double jitter = config.getJitter();
+				final Duration d = jitter > 0 ? applyJitter( backoff,
+						config.getJitter() ) : backoff;
+				Thread.sleep( d.toMillis() );
+			} catch ( final InterruptedException e ) {
+				throw new RuntimeException( "Failed to apply back off", e );
+			}
 		}
 	}
 }

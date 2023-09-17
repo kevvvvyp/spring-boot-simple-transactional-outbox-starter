@@ -14,5 +14,6 @@ public class OutboxConfiguration {
 	int pollingPool;
 	double jitter;
 	Duration lock;
-	Duration backoff;
+	Duration idleBackoff;
+	Duration processingBackoff;
 }

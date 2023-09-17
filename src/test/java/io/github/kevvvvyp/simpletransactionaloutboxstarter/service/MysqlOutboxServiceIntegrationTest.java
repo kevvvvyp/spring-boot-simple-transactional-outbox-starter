@@ -62,7 +62,8 @@ public class MysqlOutboxServiceIntegrationTest {
 
 	@BeforeEach
 	public void beforeEach() {
-		outboxConfiguration.setBackoff( Duration.ofMillis( 50 ) );
+		outboxConfiguration.setIdleBackoff( Duration.ofMillis( 50 ) );
+		outboxConfiguration.setProcessingBackoff( Duration.ZERO );
 		outboxConfiguration.setLock( Duration.ofSeconds( 5 ) );
 		outboxConfiguration.setBatchSize( 3 );
 		outboxService.start();
@@ -256,7 +257,7 @@ public class MysqlOutboxServiceIntegrationTest {
 		// Config
 		final Duration temporaryLockDuration = ofSeconds( 20 );
 		final Duration tolerance = ofMillis( 1500 );
-		outboxConfiguration.setBackoff( Duration.ofMillis( 50 ) );
+		outboxConfiguration.setIdleBackoff( Duration.ofMillis( 50 ) );
 		outboxConfiguration.setLock( temporaryLockDuration );
 		inbox.simulateDeliveryFailure();
 
