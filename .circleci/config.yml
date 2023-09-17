@@ -1,10 +1,15 @@
 version: 2
 jobs:
-  build:
+  build_and_publish:
     docker:
       - image: cimg/openjdk:17.0
     steps:
+      - setup_remote_docker:
+          version: 20.10.14
+          docker_layer_caching: true
       - checkout
+      - attach_workspace:
+          at: .
       - restore_cache:
           key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
       - restore_cache:
@@ -12,6 +17,21 @@ jobs:
       - run:
           name: Build
           command: ./gradlew build -x test
+      - run:
+          name: Run tests
+          command: ./gradlew test
+      - run:
+          name: Generate code coverage report
+          command:
+            ./gradlew jacocoTestReport
+      - store_test_results:
+          path: build/test-results/test
+      - store_artifacts:
+          path: build/test-results/test
+      - store_artifacts:
+          path: build/reports/jacoco/test/html
+      - store_artifacts:
+          path: build/libs
       - run:
           name: Run tests
           command: ./gradlew test
@@ -36,7 +56,7 @@ workflows:
   version: 2
   workflow:
     jobs:
-      - build:
+      - build_and_publish:
           filters:
             tags:
               only: /.*/
