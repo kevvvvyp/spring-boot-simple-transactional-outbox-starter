@@ -49,7 +49,9 @@ repositories {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            from components.java
+            artifact jar
+            artifact sourcesJar
+            artifact javadocJar
             if (project.hasProperty("releaseVersion")) {
                 version = project.releaseVersion
             } else {
