@@ -13,6 +13,7 @@ import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.QueryHints;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import io.github.kevvvvyp.simpletransactionaloutboxstarter.domain.model.OutboxEntity;
@@ -39,8 +40,10 @@ public interface OutboxRwRepository extends JpaRepository<OutboxEntity, UUID> {
 			)
 			ORDER BY o.scheduledAfter
 			""")
-	Page<OutboxEntity> findAvailable( final Instant now, final Instant reclaimDate,
-			final Pageable pageable, final Collection<String> messageTypes );
+	Page<OutboxEntity> findAvailable( @Param("now") final Instant now,
+			@Param("reclaimDate") final Instant reclaimDate,
+			@Param("pageable") final Pageable pageable,
+			@Param("messageTypes") final Collection<String> messageTypes );
 
 	/**
 	 * Lock messages for a period of time.
@@ -53,5 +56,6 @@ public interface OutboxRwRepository extends JpaRepository<OutboxEntity, UUID> {
 			SET outbox.lockedBy = :claimerId, outbox.updatedAt = :now
 			WHERE outbox.id IN (:ids)
 			""")
-	int lock( final UUID claimerId, final Collection<UUID> ids, final Instant now );
+	int lock( @Param("claimerId") final UUID claimerId, @Param("ids") final Collection<UUID> ids,
+			@Param("now") final Instant now );
 }

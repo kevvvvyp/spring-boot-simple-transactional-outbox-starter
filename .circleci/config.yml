@@ -1,30 +1,6 @@
 version: 2
 jobs:
-  build:
-    docker:
-      - image: cimg/openjdk:17.0
-    steps:
-      - checkout
-      - restore_cache:
-          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
-      - restore_cache:
-          key: v1-gradle-cache-{{ checksum "build.gradle" }}
-      - run:
-          name: Build
-          command: ./gradlew build -x test
-      - save_cache:
-          paths:
-            - ~/.gradle/wrapper
-          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
-      - save_cache:
-          paths:
-            - ~/.gradle/caches
-          key: v1-gradle-cache-{{ checksum "build.gradle" }}
-      - persist_to_workspace:
-          root: .
-          paths:
-            - build
-  test:
+  build_and_publish:
     docker:
       - image: cimg/openjdk:17.0
     steps:
@@ -34,6 +10,13 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
+      - restore_cache:
+          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+      - restore_cache:
+          key: v1-gradle-cache-{{ checksum "build.gradle" }}
+      - run:
+          name: Build
+          command: ./gradlew build -x test
       - run:
           name: Run tests
           command: ./gradlew test
@@ -49,13 +32,21 @@ jobs:
           path: build/reports/jacoco/test/html
       - store_artifacts:
           path: build/libs
-  publish:
-    docker:
-      - image: cimg/openjdk:17.0
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
+      - run:
+          name: Run tests
+          command: ./gradlew test
+      - run:
+          name: Generate code coverage report
+          command:
+            ./gradlew jacocoTestReport
+      - store_test_results:
+          path: build/test-results/test
+      - store_artifacts:
+          path: build/test-results/test
+      - store_artifacts:
+          path: build/reports/jacoco/test/html
+      - store_artifacts:
+          path: build/libs
       - run:
           name: Publish
           # Version in either the tag version OR BUILD-[number]-[branch_name]-[commit]-SNAPSHOT
@@ -65,20 +56,7 @@ workflows:
   version: 2
   workflow:
     jobs:
-      - build:
+      - build_and_publish:
           filters:
             tags:
               only: /.*/
-      - test:
-          filters:
-            tags:
-              only: /.*/
-          requires:
-            - build
-      - publish:
-          filters:
-            tags:
-              only: /.*/
-          requires:
-            - build
-            - test

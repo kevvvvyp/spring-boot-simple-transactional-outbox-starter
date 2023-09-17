@@ -1,8 +1,9 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
 plugins {
     id 'java-library'
     id "maven-publish"
-    id 'org.springframework.boot' version '3.1.0'
-    id 'io.spring.dependency-management' version '1.1.0'
+    id 'org.springframework.boot' version '3.1.0' apply false
     id "net.linguica.maven-settings" version "0.5"
 }
 
@@ -14,14 +15,25 @@ group = 'io.github.kevvvvyp'
 
 java {
     sourceCompatibility = '17'
+    withSourcesJar()
+    withJavadocJar()
 }
 
-bootJar {
-    enabled = false
+javadoc {
+    configure(options) {
+        tags(
+                'apiNote:a:API Note:',
+                'implSpec:a:Implementation Requirements:',
+                'implNote:a:Implementation Note:'
+        )
+    }
 }
 
-jar {
-    enabled = true
+apply plugin: 'io.spring.dependency-management'
+dependencyManagement {
+    imports {
+        mavenBom SpringBootPlugin.BOM_COORDINATES
+    }
 }
 
 configurations {
@@ -38,6 +50,8 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             artifact jar
+            artifact sourcesJar
+            artifact javadocJar
             if (project.hasProperty("releaseVersion")) {
                 version = project.releaseVersion
             } else {
@@ -68,10 +82,8 @@ publishing {
             repositories {
                 maven {
                     if (version.endsWith('-SNAPSHOT')) {
-                        project.logger.lifecycle("Publishing snaphot " + version + " to https://s01.oss.sonatype.org/content/repositories/snapshots/")
                         url "https://s01.oss.sonatype.org/content/repositories/snapshots/"
                     } else {
-                        project.logger.lifecycle("Publishing release " + version + " to https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
                         url "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
                     }
 
