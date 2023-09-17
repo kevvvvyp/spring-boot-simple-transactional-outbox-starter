@@ -15,6 +15,7 @@ group = 'io.github.kevvvvyp'
 
 java {
     sourceCompatibility = '17'
+    withSourcesJar()
 }
 
 apply plugin: 'io.spring.dependency-management'
