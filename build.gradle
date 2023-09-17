@@ -15,6 +15,18 @@ group = 'io.github.kevvvvyp'
 
 java {
     sourceCompatibility = '17'
+    withSourcesJar()
+    withJavadocJar()
+}
+
+javadoc {
+    configure(options) {
+        tags(
+                'apiNote:a:API Note:',
+                'implSpec:a:Implementation Requirements:',
+                'implNote:a:Implementation Note:'
+        )
+    }
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -35,10 +47,6 @@ repositories {
 }
 
 publishing {
-    java {
-        withSourcesJar()
-        withJavadocJar()
-    }
     publications {
         mavenJava(MavenPublication) {
             artifact jar
