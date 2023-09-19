@@ -3,7 +3,7 @@ import org.springframework.boot.gradle.plugin.SpringBootPlugin
 plugins {
     id 'java-library'
     id "maven-publish"
-    id 'org.springframework.boot' version '3.1.0' apply false
+    id 'org.springframework.boot' version '2.7.15' apply false
     id "net.linguica.maven-settings" version "0.5"
 }
 
@@ -117,16 +117,16 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.boot:spring-boot-testcontainers'
     testImplementation "org.awaitility:awaitility"
-    testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation "org.assertj:assertj-core"
 
-    testImplementation "org.testcontainers:mysql"
     testRuntimeOnly 'com.mysql:mysql-connector-j'
-
-    testImplementation "org.testcontainers:postgresql"
     testRuntimeOnly 'org.postgresql:postgresql'
+
+    testImplementation 'org.testcontainers:testcontainers:1.19.0'
+    testImplementation 'org.testcontainers:junit-jupiter:1.19.0'
+    testImplementation "org.testcontainers:mysql:1.19.0"
+    testImplementation "org.testcontainers:postgresql:1.19.0"
 
     testImplementation('com.github.javafaker:javafaker:1.0.2') {
         exclude group: 'org.yaml', module: 'snakeyaml'
