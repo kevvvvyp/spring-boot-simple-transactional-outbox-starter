@@ -83,8 +83,11 @@ public class MyApplication {
 	}
 }
 ```
+## Compatability
+### Spring
+Version: `2.7.15`
 
-## Database compatability 
+### Database 
 This project utilises Spring Data JPA (& Hibernate) so theoretically this library has the potential to support multiple different databases however only the following have been tested. 
 
 | Database | Supported Versions |
