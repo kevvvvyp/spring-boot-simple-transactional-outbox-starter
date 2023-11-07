@@ -50,12 +50,10 @@ public class OutboxEntity {
 	private UUID id;
 
 	@Size(max = 120)
-	@NotNull
 	@Column(name = "sender", nullable = false)
 	private String sender;
 
 	@Size(max = 120)
-	@NotNull
 	@Column(name = "recipient", nullable = false)
 	private String recipient;
 

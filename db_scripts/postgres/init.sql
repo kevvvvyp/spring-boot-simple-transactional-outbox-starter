@@ -3,8 +3,8 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE TABLE outbox
 (
     id                VARCHAR(36) PRIMARY KEY NOT NULL,
-    sender            VARCHAR(120)     NOT NULL,
-    recipient         VARCHAR(120)     NOT NULL,
+    sender            VARCHAR(120),
+    recipient         VARCHAR(120),
     subject           VARCHAR(120),
     type              VARCHAR(120),
     body              TEXT,
