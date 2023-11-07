@@ -5,8 +5,7 @@
 A convenient Spring Boot Starter for publishing messages via the [Transactional Outbox Pattern](https://microservices.io/patterns/data/transactional-outbox.html). This library guarantees delivery but **does not** guarantee that messages are only delivered once.
 
 ## Getting Started
-* Add the starter dependency to your `build.gradle` or `pom.xml` file
-   1. TODO upload to MVN central
+* Add the starter dependency to your `build.gradle` or `pom.xml` file - see [here](https://mvnrepository.com/artifact/io.github.kevvvvyp/spring-boot-simple-transactional-outbox-starter/).
 * Add the Outbox table to your database e.g. [db_scripts/mysql/init.sql](db_scripts/mysql/init.sql). (Please see the db_scripts folder for other database table definitions).
 * Add the following to your `application.yml` file within your project. Please note the following are default values.
 ```
