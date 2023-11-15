@@ -33,7 +33,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Service
-class OutboxDao {
+public class OutboxDao {
 	private final OutboxRoRepository readOnlyRepository;
 	private final OutboxRwRepository readWriteRepository;
 	private final OutboxConfiguration config;
