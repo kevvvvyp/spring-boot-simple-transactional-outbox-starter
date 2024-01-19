@@ -17,7 +17,7 @@ public class MysqlTestContainerInitializer implements
 
 	@Container
 	static JdbcDatabaseContainer<?> DATABASE = new MySQLContainer<>(
-			"mysql:latest" ).withDatabaseName( "sample" )
+			"mysql:8.1.0" ).withDatabaseName( "sample" )
 			.withUsername( "root" )
 			.withPassword( "root" )
 			.withInitScript( "mysql/init.sql" );
