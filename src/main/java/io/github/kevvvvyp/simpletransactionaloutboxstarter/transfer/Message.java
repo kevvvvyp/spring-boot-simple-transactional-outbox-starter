@@ -2,7 +2,7 @@ package io.github.kevvvvyp.simpletransactionaloutboxstarter.transfer;
 
 import java.time.Instant;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 
 @Builder(toBuilder = true)

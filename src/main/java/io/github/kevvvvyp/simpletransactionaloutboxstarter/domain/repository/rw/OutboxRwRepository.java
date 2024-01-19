@@ -1,13 +1,10 @@
 package io.github.kevvvvyp.simpletransactionaloutboxstarter.domain.repository.rw;
 
-import static org.hibernate.cfg.AvailableSettings.JPA_LOCK_TIMEOUT;
+import static org.hibernate.cfg.AvailableSettings.JAKARTA_LOCK_TIMEOUT;
 
 import java.time.Instant;
 import java.util.Collection;
 import java.util.UUID;
-
-import javax.persistence.LockModeType;
-import javax.persistence.QueryHint;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +18,9 @@ import org.springframework.stereotype.Repository;
 
 import io.github.kevvvvyp.simpletransactionaloutboxstarter.domain.model.OutboxEntity;
 
+import jakarta.persistence.LockModeType;
+import jakarta.persistence.QueryHint;
+
 @Repository
 public interface OutboxRwRepository extends JpaRepository<OutboxEntity, UUID> {
 
@@ -30,7 +30,7 @@ public interface OutboxRwRepository extends JpaRepository<OutboxEntity, UUID> {
 	 * Find available messages that are ready to be sent
 	 */
 	@Lock(LockModeType.PESSIMISTIC_WRITE)
-	@QueryHints({ @QueryHint(name = JPA_LOCK_TIMEOUT, value = SKIP_LOCKED) })
+	@QueryHints({ @QueryHint(name = JAKARTA_LOCK_TIMEOUT, value = SKIP_LOCKED) })
 	@Query(value = """
 			SELECT o FROM OutboxEntity o
 			WHERE (
