@@ -17,7 +17,7 @@ public class PostgresTestContainerInitializer implements
 
 	@Container
 	static JdbcDatabaseContainer<?> DATABASE = (PostgreSQLContainer<?>) new PostgreSQLContainer(
-			"postgres:latest" ).withDatabaseName( "sample" )
+			"postgres:15.0" ).withDatabaseName( "sample" )
 			.withUsername( "root" )
 			.withPassword( "root" )
 			.withInitScript( "postgres/init.sql" );

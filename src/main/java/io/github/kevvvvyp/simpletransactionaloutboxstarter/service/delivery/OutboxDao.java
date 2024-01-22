@@ -25,7 +25,7 @@ import io.github.kevvvvyp.simpletransactionaloutboxstarter.service.MessageOutbox
 import io.github.kevvvvyp.simpletransactionaloutboxstarter.service.OutboxDeliveryStrategy;
 import io.github.kevvvvyp.simpletransactionaloutboxstarter.transfer.Message;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 
 /**

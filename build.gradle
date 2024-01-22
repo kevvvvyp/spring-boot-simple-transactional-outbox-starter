@@ -3,7 +3,7 @@ import org.springframework.boot.gradle.plugin.SpringBootPlugin
 plugins {
     id 'java-library'
     id "maven-publish"
-    id 'org.springframework.boot' version '2.7.15' apply false
+    id 'org.springframework.boot' version '3.2.1' apply false
     id "net.linguica.maven-settings" version "0.5"
 }
 
@@ -81,7 +81,7 @@ publishing {
 
             repositories {
                 maven {
-                    if (version.endsWith('-SNAPSHOT')) {
+                    if (version.endsWith('.SNAPSHOT')) {
                         url "https://s01.oss.sonatype.org/content/repositories/snapshots/"
                     } else {
                         url "https://s01.oss.sonatype.org/content/repositories/releases/"
@@ -99,8 +99,23 @@ publishing {
 }
 
 signing {
+    println "Release version: " + findProperty("releaseVersion")
+
     def signingKey = findProperty("signingKey")
     def signingPassword = findProperty("signingPassword")
+
+    if (signingKey != null) {
+        println "Property found: signingKey"
+    } else {
+        println "Property not found: signingKey"
+    }
+
+    if (signingPassword != null) {
+        println "Property found: signingPassword"
+    } else {
+        println "Property not found: signingPassword"
+    }
+
     useInMemoryPgpKeys(signingKey, signingPassword)
     sign publishing.publications.named("mavenJava").get()
 }
@@ -117,16 +132,16 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.boot:spring-boot-testcontainers'
     testImplementation "org.awaitility:awaitility"
+    testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation "org.assertj:assertj-core"
 
+    testImplementation "org.testcontainers:mysql"
     testRuntimeOnly 'com.mysql:mysql-connector-j'
-    testRuntimeOnly 'org.postgresql:postgresql'
 
-    testImplementation 'org.testcontainers:testcontainers:1.19.0'
-    testImplementation 'org.testcontainers:junit-jupiter:1.19.0'
-    testImplementation "org.testcontainers:mysql:1.19.0"
-    testImplementation "org.testcontainers:postgresql:1.19.0"
+    testImplementation "org.testcontainers:postgresql"
+    testRuntimeOnly 'org.postgresql:postgresql'
 
     testImplementation('com.github.javafaker:javafaker:1.0.2') {
         exclude group: 'org.yaml', module: 'snakeyaml'
