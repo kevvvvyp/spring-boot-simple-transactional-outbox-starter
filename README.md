@@ -1,4 +1,14 @@
 # Spring-boot-simple-transactional-outbox-starter
+  <!-- Java version -->
+  <a href="https://img.shields.io/badge/Java-17-blue.svg?logo=Java">
+    <img src="https://img.shields.io/badge/Java-17-blue.svg?logo=Java"
+      alt="Java version" />
+  </a>
+  <!-- Spring Boot -->
+  <a href="https://github.com/spring-projects/spring-boot/releases">
+    <img src="https://img.shields.io/badge/SpringBoot-3.x.x-blue.svg?logo=Spring"
+      alt="Spring Boot" />
+  </a>
 
 A convenient Spring Boot Starter for publishing messages via the [Transactional Outbox Pattern](https://microservices.io/patterns/data/transactional-outbox.html). This library guarantees delivery but **does not** guarantee that messages are only delivered once.
 
@@ -74,7 +84,7 @@ public class MyApplication {
  		    .sender( "sender@email.com" )
  		    .recipient( "recipient@email.com" )
  		    .subject( "Important" )
- 		    deduplicationKey( "hhdaslkjklajwe3k4 )
+ 		    .deduplicationKey( "hhdaslkjklajwe3k4 )
  		    .scheduleAfter( Instant.now().plus( 1, ChronoUnit.HOURS ) )
  		    .body( "example" )
  		    .build();
@@ -102,3 +112,7 @@ If you find that this library works on another version please reach out or raise
 - `simple.outbox.lock` - The duration to 'lock' messages for. Once the lock duration is exceeded another process is free to then lock those messages if they remain undelivered.
 - `simple.outbox.idleBackoff` - The duration to wait between polling the database for undelivered messages, it is applied when there are no messages to process. Can be combined with Jitter to splay database load. Setting this to 0 results in no backoff being applied.
 - `simple.outbox.processingBackoff` - The duration to wait between polling the database for undelivered messages, it is applied when there are messages to be processed. Can be combined with Jitter to splay database load. Setting this to 0 results in no backoff being applied.
+
+## Build & CI
+This project utilises GitHub actions for automation.
+When a new PR is raised, `SNAPSHOT` build are published [here](https://s01.oss.sonatype.org/#view-repositories;snapshots~browsestorage~io/github/kevvvvyp/spring-boot-simple-transactional-outbox-starter) (n.b. the snapshot is overridden after each push per PR)
