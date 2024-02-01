@@ -55,6 +55,8 @@ public class TestInbox implements OutboxDeliveryStrategy {
 * Finally, simply start the OutboxService from within your application e.g.
 ```
 @SpringBootApplication
+@EnableJpaRepositories(basePackages = { YourRepositoryMarker.REPO_MARKER })
+@EntityScan(basePackages = YourEntityMarker.class)
 public class MyApplication {
 	public static void main( String[] args ) {
 		final ConfigurableApplicationContext ctx = SpringApplication.run(
@@ -67,15 +69,16 @@ public class MyApplication {
 		outboxService.start();
 		
 		// Schedule a message to be sent in an hour's time
-        Message message = Message.builder()
-				.type( "Simple" )
-				.sender( "sender@email.com" )
-				.recipient( "recipient@email.com" )
-				.subject( "Important" )
-				.deduplicationKey( "hhdaslkjklajwe3k4 )
-				.scheduleAfter( Instant.now().plus( 1, ChronoUnit.HOURS ) )
-				.body( "example" )
-				.build();
+		Message message = Message.builder()
+ 		    .type( "Simple" )
+ 		    .sender( "sender@email.com" )
+ 		    .recipient( "recipient@email.com" )
+ 		    .subject( "Important" )
+ 		    deduplicationKey( "hhdaslkjklajwe3k4 )
+ 		    .scheduleAfter( Instant.now().plus( 1, ChronoUnit.HOURS ) )
+ 		    .body( "example" )
+ 		    .build();
+ 		    
 		outboxService.register( message );
 	}
 }
