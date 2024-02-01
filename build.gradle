@@ -3,7 +3,7 @@ import org.springframework.boot.gradle.plugin.SpringBootPlugin
 plugins {
     id 'java-library'
     id "maven-publish"
-    id 'org.springframework.boot' version '3.2.1' apply false
+    id 'org.springframework.boot' version '3.2.2' apply false
     id "net.linguica.maven-settings" version "0.5"
 }
 
@@ -14,7 +14,7 @@ apply plugin: 'signing'
 group = 'io.github.kevvvvyp'
 
 java {
-    sourceCompatibility = '17'
+    sourceCompatibility = '21'
     withSourcesJar()
     withJavadocJar()
 }
@@ -153,13 +153,6 @@ dependencies {
 
     testImplementation('com.github.javafaker:javafaker:1.0.2') {
         exclude group: 'org.yaml', module: 'snakeyaml'
-    }
-}
-
-jacocoTestReport {
-    reports {
-        xml.enabled true
-        html.enabled true
     }
 }
 

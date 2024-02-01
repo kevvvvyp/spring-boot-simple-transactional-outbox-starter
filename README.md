@@ -1,12 +1,12 @@
 # Spring-boot-simple-transactional-outbox-starter
   <!-- Java version -->
-  <a href="https://img.shields.io/badge/Java-17-blue.svg?logo=Java">
-    <img src="https://img.shields.io/badge/Java-17-blue.svg?logo=Java"
+  <a href="https://img.shields.io/badge/Java-21-blue.svg?logo=Java">
+    <img src="https://img.shields.io/badge/Java-21-blue.svg?logo=Java"
       alt="Java version" />
   </a>
   <!-- Spring Boot -->
   <a href="https://github.com/spring-projects/spring-boot/releases">
-    <img src="https://img.shields.io/badge/SpringBoot-3.x.x-blue.svg?logo=Spring"
+    <img src="https://img.shields.io/badge/SpringBoot-3.2.x-blue.svg?logo=Spring"
       alt="Spring Boot" />
   </a>
 
