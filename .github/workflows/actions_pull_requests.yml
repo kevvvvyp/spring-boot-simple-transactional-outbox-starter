@@ -26,7 +26,7 @@ jobs:
           java-version: 17
 
       - name: Configure release version
-        run: echo "RELEASE_VERSION=PR-${{github.event.number}}.Build-${GITHUB_RUN_NUMBER}.${GITHUB_SHA:0:7}.SNAPSHOT" >> $GITHUB_ENV
+        run: echo "RELEASE_VERSION=PR-${{github.event.number}}.Build-${GITHUB_RUN_NUMBER}.${GITHUB_SHA:0:7}-SNAPSHOT" >> $GITHUB_ENV
 
       - name: Log release version
         run: echo "${RELEASE_VERSION}"

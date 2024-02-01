@@ -81,7 +81,7 @@ publishing {
 
             repositories {
                 maven {
-                    if (version.endsWith('.SNAPSHOT')) {
+                    if (version.endsWith('-SNAPSHOT')) {
                         url "https://s01.oss.sonatype.org/content/repositories/snapshots/"
                     } else {
                         url "https://s01.oss.sonatype.org/content/repositories/releases/"
