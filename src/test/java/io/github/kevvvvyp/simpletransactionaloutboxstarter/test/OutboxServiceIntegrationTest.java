@@ -1,4 +1,4 @@
-package io.github.kevvvvyp.simpletransactionaloutboxstarter.service;
+package io.github.kevvvvyp.simpletransactionaloutboxstarter.test;
 
 import static java.time.Duration.between;
 import static java.time.Duration.ofMillis;
@@ -36,6 +36,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import io.github.kevvvvyp.simpletransactionaloutboxstarter.config.OutboxConfiguration;
+import io.github.kevvvvyp.simpletransactionaloutboxstarter.service.TransactionalOutboxService;
 import io.github.kevvvvyp.simpletransactionaloutboxstarter.test.config.TestInbox;
 import io.github.kevvvvyp.simpletransactionaloutboxstarter.test.testcontainers.UseMysqlDatabase;
 import io.github.kevvvvyp.simpletransactionaloutboxstarter.transfer.Message;
@@ -44,15 +45,14 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @SpringBootTest
-@UseMysqlDatabase
 @TestInstance(Lifecycle.PER_CLASS)
-public class MysqlOutboxServiceIntegrationTest {
+public abstract class OutboxServiceIntegrationTest {
 	public final TransactionalOutboxService outboxService;
 	private final TestInbox inbox;
 	private final OutboxConfiguration outboxConfiguration;
 
 	@Autowired
-	public MysqlOutboxServiceIntegrationTest( final TransactionalOutboxService outboxService,
+	public OutboxServiceIntegrationTest( final TransactionalOutboxService outboxService,
 			final TestInbox inbox, final OutboxConfiguration outboxConfiguration ) {
 		this.outboxService = outboxService;
 		this.inbox = inbox;
