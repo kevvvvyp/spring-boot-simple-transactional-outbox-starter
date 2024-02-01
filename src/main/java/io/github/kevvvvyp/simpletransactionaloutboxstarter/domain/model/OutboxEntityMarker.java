@@ -1,5 +1,5 @@
 package io.github.kevvvvyp.simpletransactionaloutboxstarter.domain.model;
 
-public interface EntityMarker {
+public interface OutboxEntityMarker {
 	String ENTITY_MARKER = "io.github.kevvvvyp.simpletransactionaloutboxstarter.domain.model";
 }

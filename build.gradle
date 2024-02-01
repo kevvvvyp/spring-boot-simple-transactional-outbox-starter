@@ -49,9 +49,17 @@ repositories {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifact jar
-            artifact sourcesJar
-            artifact javadocJar
+            from components.java
+
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+
             if (project.hasProperty("releaseVersion")) {
                 version = project.releaseVersion
             } else {
