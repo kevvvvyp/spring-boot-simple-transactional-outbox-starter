@@ -1,5 +1,4 @@
 # Spring-boot-simple-transactional-outbox-starter
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/kevvvvyp/spring-boot-simple-transactional-outbox-starter/tree/main.svg?style=svg&circle-token=fb0235ac2ad18482ddebc4d504a0e23cca9e1891)](https://dl.circleci.com/status-badge/redirect/gh/kevvvvyp/spring-boot-simple-transactional-outbox-starter/tree/main)
 
 A convenient Spring Boot Starter for publishing messages via the [Transactional Outbox Pattern](https://microservices.io/patterns/data/transactional-outbox.html). This library guarantees delivery but **does not** guarantee that messages are only delivered once.
 
