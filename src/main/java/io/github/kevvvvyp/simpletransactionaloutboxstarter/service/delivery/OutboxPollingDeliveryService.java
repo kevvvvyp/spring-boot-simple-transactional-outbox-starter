@@ -18,6 +18,9 @@ import io.micrometer.core.instrument.MeterRegistry;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Service responsible for polling the Outbox for messages ready to be sent.
+ */
 @Slf4j
 @Service
 public class OutboxPollingDeliveryService implements OutboxDeliveryService {
@@ -30,6 +33,11 @@ public class OutboxPollingDeliveryService implements OutboxDeliveryService {
 	private final Counter deletedCounter;
 	private final Counter errorCounter;
 
+	/**
+	 * @param config
+	 * @param outboxDao
+	 * @param meterRegistry
+	 */
 	public OutboxPollingDeliveryService( final OutboxConfiguration config,
 			final OutboxDao outboxDao, final MeterRegistry meterRegistry ) {
 
@@ -54,6 +62,7 @@ public class OutboxPollingDeliveryService implements OutboxDeliveryService {
 		final long max = ( (Double) ( d + d * factor ) ).longValue();
 		return Duration.ofMillis( ThreadLocalRandom.current().nextLong( min, max + 1 ) );
 	}
+
 
 	public void start() {
 		if ( !isRunning() ) {

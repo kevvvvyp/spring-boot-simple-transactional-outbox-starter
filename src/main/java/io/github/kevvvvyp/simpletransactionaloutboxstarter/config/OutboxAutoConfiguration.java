@@ -14,6 +14,9 @@ import io.github.kevvvvyp.simpletransactionaloutboxstarter.service.registration.
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Library autoconfiguration
+ */
 @Slf4j
 @AutoConfiguration
 @Import({ SimpleTransactionalOutboxService.class,

@@ -16,6 +16,9 @@ import io.github.kevvvvyp.simpletransactionaloutboxstarter.transfer.Message;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Outbox Service Impl
+ */
 @Slf4j
 @Service
 public class SimpleTransactionalOutboxService implements TransactionalOutboxService {
