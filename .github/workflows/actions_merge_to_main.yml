@@ -23,7 +23,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 17
+          java-version: 21
 
       - name: Configure release version
         run: echo "RELEASE_VERSION=main.$(date +'%Y%m%d%H%M%S').${GITHUB_SHA:0:7}.SNAPSHOT" >> $GITHUB_ENV
