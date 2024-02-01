@@ -107,8 +107,6 @@ publishing {
 }
 
 signing {
-    println "Release version: " + findProperty("releaseVersion")
-
     def signingKey = findProperty("signingKey")
     def signingPassword = findProperty("signingPassword")
 
