@@ -167,3 +167,4 @@ task copyDatabaseInitScripts(type: Copy) {
 }
 
 processTestResources.dependsOn(copyDatabaseInitScripts)
+javadoc.options.addStringOption('Xdoclint:none', '-quiet')
