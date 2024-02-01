@@ -29,7 +29,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * Transactional Outbox Service
+ * Transactional Outbox Service DAO
  */
 @Slf4j
 @Service
@@ -39,6 +39,12 @@ public class OutboxDao {
 	private final OutboxConfiguration config;
 	private final Map<String, OutboxDeliveryStrategy> deliveryStrategyByMessageType;
 
+	/**
+	 * @param readOnlyRepository
+	 * @param readWriteRepository
+	 * @param config
+	 * @param deliveryStrategies
+	 */
 	@Autowired
 	protected OutboxDao( @NotNull final OutboxRoRepository readOnlyRepository,
 			@NotNull final OutboxRwRepository readWriteRepository,
@@ -51,11 +57,21 @@ public class OutboxDao {
 				.collect( toMap( OutboxDeliveryStrategy::messageType, strategy -> strategy ) );
 	}
 
+	/**
+	 * @return True if empty, false if otherwise
+	 */
 	public boolean isNotEmpty() {
 		return !deliveryStrategyByMessageType.isEmpty() && readOnlyRepository.availableMessages(
 				now(), now().minus( config.getLock() ), deliveryStrategyByMessageType.keySet() );
 	}
 
+	/**
+	 * Lock one or more messages in a batch. This ties these messages to a single thread until
+	 * they are either processed or the claim expiry elapses.
+	 *
+	 * @param lockId
+	 * @return Map of the messages by their unique identifiers
+	 */
 	@Transactional(rollbackFor = Exception.class,
 			propagation = Propagation.REQUIRED,
 			isolation = READ_COMMITTED)
@@ -86,6 +102,12 @@ public class OutboxDao {
 		}
 	}
 
+	/**
+	 * Send messages to the delivery strategy, if they are successfully consumed then we delete
+	 * these messages from our outbox.
+	 *
+	 * @param messagesById
+	 */
 	public void send( final Map<UUID, Message> messagesById ) {
 
 		if ( deliveryStrategyByMessageType.isEmpty() ) {
@@ -104,6 +126,11 @@ public class OutboxDao {
 		messagesByDeliveryStrategy.forEach( OutboxDeliveryStrategy::send );
 	}
 
+	/**
+	 * Delete messages by their ids.
+	 *
+	 * @param messagesById
+	 */
 	@Transactional(rollbackFor = Exception.class)
 	public void delete( final Map<UUID, Message> messagesById ) {
 		readWriteRepository.deleteAllById( messagesById.keySet() );

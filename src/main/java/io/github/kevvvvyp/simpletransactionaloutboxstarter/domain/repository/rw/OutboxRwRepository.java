@@ -24,10 +24,19 @@ import jakarta.persistence.QueryHint;
 @Repository
 public interface OutboxRwRepository extends JpaRepository<OutboxEntity, UUID> {
 
+	/**
+	 * Indicates that we should utilise the databases `SKIP LOCKED` feature if possible
+	 */
 	String SKIP_LOCKED = "-2";
 
 	/**
-	 * Find available messages that are ready to be sent
+	 * Find available messages that are ready to be sent. Here we "lock" them to then be updated.
+	 *
+	 * @param now
+	 * @param reclaimDate
+	 * @param pageable
+	 * @param messageTypes
+	 * @return
 	 */
 	@Lock(LockModeType.PESSIMISTIC_WRITE)
 	@QueryHints({ @QueryHint(name = JAKARTA_LOCK_TIMEOUT, value = SKIP_LOCKED) })
@@ -48,6 +57,10 @@ public interface OutboxRwRepository extends JpaRepository<OutboxEntity, UUID> {
 	/**
 	 * Lock messages for a period of time.
 	 *
+	 * @param claimerId
+	 * @param ids
+	 * @param now
+	 * @return
 	 * @implNote The Application Configuration when messages can be reclaimed.
 	 */
 	@Modifying

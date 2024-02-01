@@ -8,7 +8,16 @@ import java.time.temporal.ChronoUnit;
 import io.github.kevvvvyp.simpletransactionaloutboxstarter.domain.model.OutboxEntity;
 import io.github.kevvvvyp.simpletransactionaloutboxstarter.transfer.Message;
 
+/**
+ * Transformer between a Message DTO and the database entity
+ */
 public class MessageOutboxEntityTransformer {
+
+	/**
+	 * Convert a message to an entity
+	 * @param message
+	 * @return
+	 */
 	public static OutboxEntity toEntity( final Message message ) {
 		final Instant scheduledAfter = ofNullable( message.scheduleAfter() ).orElseGet(
 				Instant::now );
@@ -25,6 +34,11 @@ public class MessageOutboxEntityTransformer {
 				.build();
 	}
 
+	/**
+	 * Convert and entity to a message
+	 * @param entity
+	 * @return
+	 */
 	public static Message toMessage( final OutboxEntity entity ) {
 		return Message.builder()
 				.type( entity.getType() )
