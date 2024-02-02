@@ -33,14 +33,14 @@ jobs:
         # settings.xml file
         run: rm ~/.m2/settings.xml
 
-#      - name: Setup Gradle
-#        uses: gradle/gradle-build-action@v2
-#
-#      - name: Build
-#        run: ./gradlew build -x Test
-#
-#      - name: Run Tests
-#        run: ./gradlew Test
-#
-#      - name: Gradle Publish
-#        run: ./gradlew publish -PreleaseVersion=${GITHUB_REF_NAME} -PossrhUsername=$OSSRH_USERNAME -PossrhPassword=$OSSRH_PASSWORD -PsigningKey=$SIGNING_KEY -PsigningPassword=$SIGNING_PASSWORD
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Build
+        run: ./gradlew build -x Test
+
+      - name: Run Tests
+        run: ./gradlew Test
+
+      - name: Gradle Publish
+        run: ./gradlew publish -PreleaseVersion=${GITHUB_REF_NAME} -PossrhUsername=$OSSRH_USERNAME -PossrhPassword=$OSSRH_PASSWORD -PsigningKey=$SIGNING_KEY -PsigningPassword=$SIGNING_PASSWORD
