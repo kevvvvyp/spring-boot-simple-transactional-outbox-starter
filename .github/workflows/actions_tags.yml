@@ -24,11 +24,8 @@ jobs:
           distribution: temurin
           java-version: 21
 
-      - name: Log env
-        run: set
-
       - name: Log release version
-        run: echo "${GITHUB_HEAD_REF}"
+        run: echo "${GITHUB_REF_NAME}"
 
       - name: Remove default github maven configuration
         # This step is a workaround to avoid a decryption issue of Beam's
@@ -46,4 +43,4 @@ jobs:
 #        run: ./gradlew Test
 #
 #      - name: Gradle Publish
-#        run: ./gradlew publish -PreleaseVersion=${RELEASE_VERSION} -PossrhUsername=$OSSRH_USERNAME -PossrhPassword=$OSSRH_PASSWORD -PsigningKey=$SIGNING_KEY -PsigningPassword=$SIGNING_PASSWORD
+#        run: ./gradlew publish -PreleaseVersion=${GITHUB_REF_NAME} -PossrhUsername=$OSSRH_USERNAME -PossrhPassword=$OSSRH_PASSWORD -PsigningKey=$SIGNING_KEY -PsigningPassword=$SIGNING_PASSWORD
