@@ -24,11 +24,11 @@ jobs:
           distribution: temurin
           java-version: 21
 
-      - name: Configure release version
-        run: echo "RELEASE_VERSION=${GITHUB_BASE_REF}" >> $GITHUB_ENV
+      - name: Log env
+        run: set
 
       - name: Log release version
-        run: echo "${RELEASE_VERSION}"
+        run: echo "${GITHUB_HEAD_REF}"
 
       - name: Remove default github maven configuration
         # This step is a workaround to avoid a decryption issue of Beam's
@@ -36,14 +36,14 @@ jobs:
         # settings.xml file
         run: rm ~/.m2/settings.xml
 
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-
-      - name: Build
-        run: ./gradlew build -x Test
-
-      - name: Run Tests
-        run: ./gradlew Test
-
-      - name: Gradle Publish
-        run: ./gradlew publish -PreleaseVersion=${RELEASE_VERSION} -PossrhUsername=$OSSRH_USERNAME -PossrhPassword=$OSSRH_PASSWORD -PsigningKey=$SIGNING_KEY -PsigningPassword=$SIGNING_PASSWORD
+#      - name: Setup Gradle
+#        uses: gradle/gradle-build-action@v2
+#
+#      - name: Build
+#        run: ./gradlew build -x Test
+#
+#      - name: Run Tests
+#        run: ./gradlew Test
+#
+#      - name: Gradle Publish
+#        run: ./gradlew publish -PreleaseVersion=${RELEASE_VERSION} -PossrhUsername=$OSSRH_USERNAME -PossrhPassword=$OSSRH_PASSWORD -PsigningKey=$SIGNING_KEY -PsigningPassword=$SIGNING_PASSWORD
