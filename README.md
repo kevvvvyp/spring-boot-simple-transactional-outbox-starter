@@ -59,7 +59,7 @@ public class TestInbox implements OutboxDeliveryStrategy {
 
 	@Override
 	public String messageType() {
-		return "Example";
+		return "MyMessageType";
 	}
 ```
 * Finally, simply start the OutboxService from within your application e.g.
@@ -80,7 +80,7 @@ public class MyApplication {
 		
 		// Schedule a message to be sent in an hour's time
 		Message message = Message.builder()
- 		    .type( "Simple" )
+ 		    .type( "MyMessageType" )
  		    .sender( "sender@email.com" )
  		    .recipient( "recipient@email.com" )
  		    .subject( "Important" )
